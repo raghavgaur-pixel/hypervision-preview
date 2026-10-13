@@ -384,7 +384,7 @@ function App() {
   const isUpdatePassword = mode === 'update-password'
 
   return (
-    <main className="auth-shell">
+    <main className={`auth-shell mode-${mode === 'signup' ? 'signup' : 'login'}`}>
       <Atmosphere />
       <div className="ambient-glow ambient-one" />
       <div className="ambient-glow ambient-two" />
@@ -395,8 +395,7 @@ function App() {
           HYPERVISION<span className="brand-period">.</span>
         </a>
         <div className="topbar-right">
-          <span className="system-status"><span /> ALL SYSTEMS NOMINAL</span>
-          <span className="topbar-index">HV—01</span>
+          <span className="system-status"><span /> A QUIETER KIND OF ELSEWHERE</span>
         </div>
       </header>
 
@@ -408,33 +407,23 @@ function App() {
             <p className="hero-description">A new perspective. A different frequency. Everything you’re about to become starts with a single step.</p>
             <div className="hero-cta">
               <span className="cta-orbit"><ArrowDownRight size={18} /></span>
-              <div><strong>Your next chapter starts here.</strong><span>One identity. Infinite possibilities.</span></div>
+              <div><strong>Step into the strange.</strong><span>A little less ordinary, a little more you.</span></div>
             </div>
           </div>
 
           <div className="brutal-art" aria-hidden="true">
-            <div className="art-sticker art-sticker-top">HV® / 001</div>
             <div className="art-sun"></div>
             <div className="art-slab art-slab-orange"></div>
             <div className="art-slab art-slab-lime"></div>
             <div className="art-ring"></div>
             <div className="art-cross">✳</div>
-            <div className="art-sticker art-sticker-bottom">FORM FOLLOWS FEELING ↗</div>
           </div>
 
-          <div className="orb-caption">
-            <div className="orb-caption-line" />
-            <div><span>FIG. 001 / THE THRESHOLD</span><strong>A different kind of beginning</strong></div>
-          </div>
 
-          <div className="hero-bottom">
-            <div className="coordinate-block"><span>COORDINATES</span><strong>37° 14' 06.2" N</strong><strong>INTO THE UNKNOWN</strong></div>
-            <div className="signal-block"><span>LIVE SIGNAL</span><div className="signal-bars">{Array.from({ length: 18 }, (_, index) => <i key={index} style={{ '--bar': `${14 + ((index * 17) % 32)}px` }} />)}</div></div>
-          </div>
         </section>
 
         <section className="form-side">
-          <div className="form-card">
+          <div className="form-card" key={mode}>
             <div className="form-card-top">
               <div className="form-icon"><Sparkles size={19} /></div>
               <span className="form-step">{isReset ? 'RECOVERY PROTOCOL' : isSignup ? 'NEW IDENTITY / 01' : 'RETURNING IDENTITY / 02'}</span>
@@ -516,8 +505,7 @@ function App() {
         </section>
       </div>
 
-      <footer className="page-footer"><span>HYPERVISION / IDENTITY SYSTEMS</span><span>BUILT FOR WHAT’S NEXT <ArrowDownRight size={13} /></span></footer>
-      {!supabaseReady && <div className="setup-pill"><span /> SUPABASE AWAITS CONFIGURATION</div>}
+      {!supabaseReady && <div className="setup-pill"><span /> Authentication setup required</div>}
     </main>
   )
 }
