@@ -423,16 +423,16 @@ function App() {
           HYPERVISION<span className="brand-period">.</span>
         </a>
         <div className="topbar-right">
-          <span className="system-status"><span /> A QUIETER KIND OF ELSEWHERE</span>
+          
         </div>
       </header>
 
       <div className="layout-grid">
         <section className="hero-panel">
           <div className="hero-copy">
-            <div className="eyebrow"><span className="eyebrow-line" /> THE FUTURE IS A PLACE</div>
-            <h1>Step beyond<br />the <span className="gradient-word">ordinary.</span></h1>
-            <p className="hero-description">A new perspective. A different frequency. Everything you’re about to become starts with a single step.</p>
+            <div className="eyebrow">HYPERVISION</div>
+            <h1>A world<br />slightly <span className="gradient-word">elsewhere.</span></h1>
+            <p className="hero-description"></p>
             
           </div>
 
@@ -524,9 +524,9 @@ function App() {
               </div>
             )}
 
-            <div className="card-foot"><ShieldCheck size={14} /><span>ENCRYPTED CONNECTION</span><span className="foot-divider" /><span>YOUR DATA, YOURS</span></div>
+            
           </div>
-          <div className="form-side-note"><Zap size={13} /><span>Designed for the next version of you.</span></div>
+          
         </section>
       </div>
 
