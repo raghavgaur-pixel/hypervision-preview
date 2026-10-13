@@ -39,28 +39,28 @@ function Atmosphere() {
     scene.add(core)
 
     const knotMaterial = new THREE.MeshStandardMaterial({
-      color: 0x9c8cff,
-      emissive: 0x5540ff,
-      emissiveIntensity: 1.35,
-      metalness: 0.8,
-      roughness: 0.24,
+      color: 0xd4b6a0,
+      emissive: 0x573b68,
+      emissiveIntensity: 0.65,
+      metalness: 0.28,
+      roughness: 0.62,
       wireframe: true,
       transparent: true,
       opacity: 0.82,
     })
-    const knot = new THREE.Mesh(new THREE.TorusKnotGeometry(1.5, 0.34, 220, 18, 2, 5), knotMaterial)
+    const knot = new THREE.Mesh(new THREE.TorusKnotGeometry(1.55, 0.24, 240, 18, 2, 3), knotMaterial)
     core.add(knot)
 
     const inner = new THREE.Mesh(
-      new THREE.IcosahedronGeometry(0.94, 2),
-      new THREE.MeshBasicMaterial({ color: 0x6ce9ff, wireframe: true, transparent: true, opacity: 0.16 }),
+      new THREE.IcosahedronGeometry(0.88, 3),
+      new THREE.MeshBasicMaterial({ color: 0xb5e3d8, wireframe: false, transparent: true, opacity: 0.42 }),
     )
     core.add(inner)
 
     const haloMaterial = new THREE.MeshBasicMaterial({
-      color: 0x7d70ff,
+      color: 0xe9c8a7,
       transparent: true,
-      opacity: 0.24,
+      opacity: 0.32,
       side: THREE.DoubleSide,
       wireframe: true,
     })
@@ -72,6 +72,45 @@ function Atmosphere() {
     haloTwo.rotation.set(1.3, -0.55, 0.7)
     haloTwo.scale.set(0.8, 1.2, 1)
     core.add(haloTwo)
+
+    // Surreal dream objects: an impossible moon and a suspended, liquid-like pearl.
+    const moon = new THREE.Mesh(
+      new THREE.SphereGeometry(0.72, 64, 64),
+      new THREE.MeshStandardMaterial({ color: 0xf0d9bd, roughness: 0.88, metalness: 0.02 })
+    )
+    moon.position.set(2.35, 1.55, -1.8)
+    scene.add(moon)
+
+    const moonHalo = new THREE.Mesh(
+      new THREE.TorusGeometry(1.03, 0.012, 8, 160),
+      new THREE.MeshBasicMaterial({ color: 0xe9c8a7, transparent: true, opacity: 0.72 })
+    )
+    moonHalo.position.copy(moon.position)
+    moonHalo.rotation.set(1.0, 0.2, -0.3)
+    scene.add(moonHalo)
+
+    const pearl = new THREE.Mesh(
+      new THREE.SphereGeometry(0.34, 48, 48),
+      new THREE.MeshPhysicalMaterial({ color: 0xb5e3d8, roughness: 0.12, metalness: 0.18, clearcoat: 1, clearcoatRoughness: 0.08 })
+    )
+    pearl.position.set(-2.55, -1.3, 0.4)
+    scene.add(pearl)
+
+    const shard = new THREE.Mesh(
+      new THREE.TetrahedronGeometry(0.68, 0),
+      new THREE.MeshStandardMaterial({ color: 0x8e719f, roughness: 0.48, metalness: 0.2, flatShading: true })
+    )
+    shard.position.set(2.55, -1.55, -0.3)
+    shard.rotation.set(0.4, 0.2, 0.6)
+    scene.add(shard)
+
+    const floatingRing = new THREE.Mesh(
+      new THREE.TorusGeometry(0.7, 0.035, 12, 96),
+      new THREE.MeshStandardMaterial({ color: 0xb5e3d8, metalness: 0.62, roughness: 0.25 })
+    )
+    floatingRing.position.set(-2.4, 1.55, -1.2)
+    floatingRing.rotation.set(0.9, 0.1, 0.4)
+    scene.add(floatingRing)
 
     const starCount = 1500
     const starPositions = new Float32Array(starCount * 3)
@@ -94,11 +133,11 @@ function Atmosphere() {
     )
     scene.add(stars)
 
-    scene.add(new THREE.AmbientLight(0x8b91ff, 1.5))
-    const keyLight = new THREE.PointLight(0x8b7aff, 24, 18)
+    scene.add(new THREE.AmbientLight(0xaaa0c8, 1.8))
+    const keyLight = new THREE.PointLight(0xe9c8a7, 30, 22)
     keyLight.position.set(3, 2, 5)
     scene.add(keyLight)
-    const rimLight = new THREE.PointLight(0x49e8ff, 16, 15)
+    const rimLight = new THREE.PointLight(0x8adbc9, 22, 18)
     rimLight.position.set(-4, -2, 3)
     scene.add(rimLight)
 
@@ -106,7 +145,7 @@ function Atmosphere() {
       const width = mount.clientWidth || window.innerWidth
       const height = mount.clientHeight || window.innerHeight
       camera.aspect = width / height
-      camera.position.x = width < 700 ? 0.45 : 1.35
+      camera.position.x = width < 700 ? 0.1 : 0.7
       camera.position.z = width < 700 ? 11 : 10
       camera.updateProjectionMatrix()
       renderer.setSize(width, height)
@@ -126,12 +165,21 @@ function Atmosphere() {
     const animate = () => {
       frame = requestAnimationFrame(animate)
       const time = performance.now() * 0.00018
-      knot.rotation.x = time * 1.1 + pointerY
-      knot.rotation.y = time * 1.8 + pointerX
-      inner.rotation.x = -time * 1.2
-      inner.rotation.y = time * 0.7
-      halo.rotation.z = time * 0.8
-      haloTwo.rotation.x = time * 0.5
+      knot.rotation.x = time * 0.28 + pointerY
+      knot.rotation.y = time * 0.42 + pointerX
+      inner.rotation.x = -time * 0.32
+      inner.rotation.y = time * 0.22
+      halo.rotation.z = time * 0.18
+      haloTwo.rotation.x = time * 0.14
+      moon.position.y = 1.55 + Math.sin(time * 2.2) * 0.12
+      moon.rotation.y = time * 0.08
+      moonHalo.rotation.z = -time * 0.1
+      pearl.position.y = -1.3 + Math.sin(time * 2.8 + 1) * 0.24
+      pearl.rotation.y = time * 0.22
+      shard.rotation.x = 0.4 + Math.sin(time * 1.6) * 0.18
+      shard.rotation.y = time * 0.24
+      floatingRing.rotation.y = 0.1 + time * 0.2
+      floatingRing.rotation.z = 0.4 + Math.sin(time * 1.2) * 0.12
       core.rotation.y += (pointerX - core.rotation.y) * 0.012
       core.rotation.x += (pointerY - core.rotation.x) * 0.012
       stars.rotation.y = time * 0.07
