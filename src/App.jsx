@@ -362,7 +362,6 @@ function App() {
         <Atmosphere />
         <div className="portal-topbar">
           <a className="wordmark" href="/" aria-label="Hypervision home"><span className="brand-symbol"><Orbit size={22} /></span>HYPERVISION<span className="brand-period">.</span></a>
-          <span className="system-status"><span /> SECURE SESSION ACTIVE</span>
         </div>
         <section className="welcome-card">
           <div className="welcome-icon"><Fingerprint size={32} /></div>
@@ -374,7 +373,6 @@ function App() {
           <button className="submit-button" type="button" onClick={signOut} disabled={busy}>{busy ? 'Closing session…' : 'Sign out securely'} <ArrowRight size={17} /></button>
           {notice && <div className={`notice ${notice.type}`} role="status">{notice.text}</div>}
         </section>
-        <footer className="page-footer"><span>HYPERVISION / IDENTITY SYSTEMS</span><span>BUILT FOR WHAT’S NEXT <ArrowDownRight size={13} /></span></footer>
       </main>
     )
   }
@@ -426,7 +424,7 @@ function App() {
           <div className="form-card" key={mode}>
             <div className="form-card-top">
               <div className="form-icon"><Sparkles size={19} /></div>
-              <span className="form-step">{isReset ? 'RECOVERY PROTOCOL' : isSignup ? 'NEW IDENTITY / 01' : 'RETURNING IDENTITY / 02'}</span>
+              <span className="form-step">{isReset ? 'PASSWORD RESET' : isSignup ? 'CREATE ACCOUNT' : 'SIGN IN'}</span>
             </div>
 
             <div className="form-heading">
