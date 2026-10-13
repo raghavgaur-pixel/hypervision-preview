@@ -112,26 +112,10 @@ function Atmosphere() {
     floatingRing.rotation.set(0.9, 0.1, 0.4)
     scene.add(floatingRing)
 
-    const starCount = 1500
-    const starPositions = new Float32Array(starCount * 3)
-    const starColors = new Float32Array(starCount * 3)
-    for (let i = 0; i < starCount; i += 1) {
-      starPositions[i * 3] = (Math.random() - 0.5) * 24
-      starPositions[i * 3 + 1] = (Math.random() - 0.5) * 16
-      starPositions[i * 3 + 2] = (Math.random() - 0.5) * 14 - 2
-      const cyan = Math.random() > 0.72
-      starColors[i * 3] = cyan ? 0.36 : 0.62
-      starColors[i * 3 + 1] = cyan ? 0.91 : 0.54
-      starColors[i * 3 + 2] = 1
-    }
-    const starGeometry = new THREE.BufferGeometry()
-    starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3))
-    starGeometry.setAttribute('color', new THREE.BufferAttribute(starColors, 3))
-    const stars = new THREE.Points(
-      starGeometry,
-      new THREE.PointsMaterial({ size: 0.022, vertexColors: true, transparent: true, opacity: 0.82, sizeAttenuation: true }),
-    )
-    scene.add(stars)
+    // No particle field: the composition uses a single surreal landscape illustration instead.
+    const landscape = new THREE.Group()
+    scene.add(landscape)
+
 
     scene.add(new THREE.AmbientLight(0xaaa0c8, 1.8))
     const keyLight = new THREE.PointLight(0xe9c8a7, 30, 22)
@@ -182,7 +166,6 @@ function Atmosphere() {
       floatingRing.rotation.z = 0.4 + Math.sin(time * 1.2) * 0.12
       core.rotation.y += (pointerX - core.rotation.y) * 0.012
       core.rotation.x += (pointerY - core.rotation.x) * 0.012
-      stars.rotation.y = time * 0.07
       renderer.render(scene, camera)
     }
     animate()
@@ -432,8 +415,7 @@ function App() {
   return (
     <main className={`auth-shell mode-${mode === 'signup' ? 'signup' : 'login'}`}>
       <Atmosphere />
-      <div className="ambient-glow ambient-one" />
-      <div className="ambient-glow ambient-two" />
+      <div className="surreal-landscape" aria-hidden="true" />
 
       <header className="topbar">
         <a className="wordmark" href="/" aria-label="Hypervision home">
@@ -451,10 +433,7 @@ function App() {
             <div className="eyebrow"><span className="eyebrow-line" /> THE FUTURE IS A PLACE</div>
             <h1>Step beyond<br />the <span className="gradient-word">ordinary.</span></h1>
             <p className="hero-description">A new perspective. A different frequency. Everything you’re about to become starts with a single step.</p>
-            <div className="hero-cta">
-              <span className="cta-orbit"><ArrowDownRight size={18} /></span>
-              <div><strong>Step into the strange.</strong><span>A little less ordinary, a little more you.</span></div>
-            </div>
+            
           </div>
 
           <div className="brutal-art" aria-hidden="true">
@@ -551,7 +530,8 @@ function App() {
         </section>
       </div>
 
-      {!supabaseReady && <div className="setup-pill"><span /> Authentication setup required</div>}
+      {!supabaseReady && <div className="setup-pill">Authentication setup required</div>}
+      <footer className="creator-credit">Designed & built by <span>Raghav Gaur</span></footer>
     </main>
   )
 }
