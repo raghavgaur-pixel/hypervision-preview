@@ -232,7 +232,8 @@ function ScrollWorld() {
         })
         world.querySelectorAll('[data-reveal]').forEach((panel) => {
           const box = panel.getBoundingClientRect()
-          const visible = Math.max(0, Math.min(1, (window.innerHeight * 0.82 - box.top) / (box.height * 0.7)))
+          const start = Number(panel.dataset.reveal || 0)
+          const visible = Math.max(0, Math.min(1, (progress - start) / 0.13))
           panel.style.opacity = String(0.22 + visible * 0.78)
           panel.style.transform = `translate3d(0, ${(1 - visible) * 42}px, 0)`
         })
@@ -263,15 +264,15 @@ function ScrollWorld() {
         <div className="dream-ladder" data-depth="1.8"><i /><i /><i /><i /><i /><i /><i /><i /></div>
         <div className="dream-mountains dream-mountains-near" data-depth="1.05" />
         <div className="dream-ground" data-depth="0.6" />
-        <div className="dream-copy dream-copy-one" data-reveal>
+        <div className="dream-copy dream-copy-one" data-reveal="0.03">
           <span className="dream-kicker">01 / THE ORDINARY FALLS AWAY</span>
           <h2>Reality is<br /><em>only a habit.</em></h2>
         </div>
-        <div className="dream-copy dream-copy-two" data-reveal>
+        <div className="dream-copy dream-copy-two" data-reveal="0.36">
           <span className="dream-kicker">02 / LOOK UP</span>
           <h2>Somewhere,<br />the impossible<br /><em>keeps moving.</em></h2>
         </div>
-        <div className="dream-copy dream-copy-three" data-reveal>
+        <div className="dream-copy dream-copy-three" data-reveal="0.70">
           <span className="dream-kicker">03 / STEP OUTSIDE IT</span>
           <h2>There is more<br />than one way<br /><em>to arrive.</em></h2>
         </div>
