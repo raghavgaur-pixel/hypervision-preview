@@ -2302,7 +2302,7 @@ html, body { background: #0b0b10; }
 .dream-scroll { position:relative; z-index:1; height:320vh; margin:14vh calc(-1 * clamp(20px,5vw,72px)) 0; color:#f4ead9; background:#111b1b; isolation:isolate; }
 .dream-sticky { position:sticky; top:0; height:100vh; min-height:580px; overflow:hidden; background:#9abfc1; isolation:isolate; }
 .dream-sky { position:absolute; inset:0; background:linear-gradient(180deg,#91c5d0 0%,#d7d8c8 54%,#e7b58e 100%); }
-.dream-moon { position:absolute; width:clamp(95px,13vw,190px); aspect-ratio:1; border-radius:50%; top:12%; right:17%; background:#f7e9c9; box-shadow:0 0 70px #ffee c933; }
+.dream-moon { position:absolute; width:clamp(95px,13vw,190px); aspect-ratio:1; border-radius:50%; top:12%; right:17%; background:#f7e9c9; box-shadow:0 0 70px rgba(255,238,200,.24); }
 .dream-mountains { position:absolute; inset:auto -10% 0; height:56%; clip-path:polygon(0 68%,10% 42%,17% 56%,28% 22%,37% 61%,49% 35%,59% 65%,71% 20%,82% 58%,91% 31%,100% 62%,100% 100%,0 100%); }
 .dream-mountains-far { background:#789b9c; bottom:20%; opacity:.85; }
 .dream-mountains-near { background:#385b59; height:48%; bottom:8%; }
